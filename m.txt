@@ -1,0 +1,158 @@
+#include <cstdio>
+#include <cstdlib>
+struct Test{
+int add(int a, int b){
+return(a+b);
+}
+};
+
+  #include <cstdio>
+  #include <windows.h>
+  LPCTSTR ClsName = "Hello";
+  LPCTSTR WndName = "World";
+
+  LRESULT CALLBACK WndProcedure(HWND hWnd, UINT uMsg,
+			      WPARAM wParam, LPARAM lParam);
+
+  INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
+               LPSTR lpCmdLine, int nCmdShow)
+  {
+	MSG        Msg;
+	HWND       hWnd;
+	WNDCLASSEX WndClsEx;
+
+	// Create the application window
+	WndClsEx.cbSize        = sizeof(WNDCLASSEX);
+	WndClsEx.style         = CS_HREDRAW | CS_VREDRAW;
+	WndClsEx.lpfnWndProc   = WndProcedure;
+	WndClsEx.cbClsExtra    = 0;
+	WndClsEx.cbWndExtra    = 0;
+	WndClsEx.hIcon         = LoadIcon(NULL, IDI_APPLICATION);
+	WndClsEx.hCursor       = LoadCursor(NULL, IDC_ARROW);
+	WndClsEx.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+	WndClsEx.lpszMenuName  = NULL;
+	WndClsEx.lpszClassName = ClsName;
+	WndClsEx.hInstance     = hInstance;
+	WndClsEx.hIconSm       = LoadIcon(NULL, IDI_APPLICATION);
+
+	// Register the application
+	RegisterClassEx(&WndClsEx);
+
+	// Create the window object
+	hWnd = CreateWindow(ClsName,
+			  WndName,
+			  WS_OVERLAPPEDWINDOW,
+			  CW_USEDEFAULT,
+			  CW_USEDEFAULT,
+			  CW_USEDEFAULT,
+			  CW_USEDEFAULT,
+			  NULL,
+			  NULL,
+			  hInstance,
+			  NULL);
+	
+	// Find out if the window was created
+	if( !hWnd ) // If the window was not created,
+		return 0; // stop the application
+
+	// Display the window to the user
+	ShowWindow(hWnd, SW_SHOWNORMAL);
+	UpdateWindow(hWnd);
+
+	// Decode and treat the messages
+	// as long as the application is running
+	while( GetMessage(&Msg, NULL, 0, 0) )
+	{
+             TranslateMessage(&Msg);
+             DispatchMessage(&Msg);
+	}
+
+	return Msg.wParam;
+  }
+
+   LRESULT CALLBACK WndProcedure(HWND hWnd, UINT Msg,  WPARAM wParam, LPARAM lParam)
+   {
+    switch(Msg)
+    {
+    // If the user wants to close the application
+    case WM_DESTROY:
+        // then close it
+        PostQuitMessage(WM_QUIT);
+        break;
+
+    
+    
+       case WM_PAINT:
+          LRESULT message_WM_PAINT(HWND, UINT, WPARAM, LPARAM);
+          return message_WM_PAINT(hWnd, Msg, wParam, lParam);
+    
+    
+    
+    
+    
+    
+    
+       case WM_CREATE:
+          LRESULT message_WM_CREATE(HWND, UINT, WPARAM, LPARAM);
+          return message_WM_CREATE(hWnd, Msg, wParam, lParam);
+    
+    
+    
+       case WM_COMMAND:
+          LRESULT message_WM_COMMAND(HWND, UINT, WPARAM, LPARAM);
+          return message_WM_COMMAND(hWnd, Msg, wParam, lParam);
+    
+    
+    
+       case WM_KEYDOWN:
+          LRESULT message_WM_KEYDOWN(HWND, UINT, WPARAM, LPARAM);
+          return message_WM_KEYDOWN(hWnd, Msg, wParam, lParam);
+    
+    
+    default:
+        // Process the left-over messages
+        return DefWindowProc(hWnd, Msg, wParam, lParam);
+    }
+    // If something was not done, let it go
+    return 0;
+   } 
+    
+    
+          LRESULT message_WM_PAINT(HWND h, UINT m,  WPARAM w, LPARAM l){
+              HDC hdc;
+PAINTSTRUCT psPaint;
+hdc = BeginPaint(h, &psPaint);
+MoveToEx(hdc,0,0,0);
+LineTo(hdc,50,50);
+EndPaint(h,&psPaint);
+
+          }
+     
+    
+    
+    
+    
+    
+    
+          LRESULT message_WM_CREATE(HWND h, UINT m,  WPARAM w, LPARAM l){
+              CreateWindowEx(0,"Button","click me",WS_CHILD|WS_VISIBLE,0,0,100,20,h,(HMENU)100,0,0);
+
+          }
+     
+    
+    
+          LRESULT message_WM_COMMAND(HWND h, UINT m,  WPARAM w, LPARAM l){
+              if(w == 100){MessageBox(0,"Hello",0,16);
+}
+          }
+     
+    
+    
+          LRESULT message_WM_KEYDOWN(HWND h, UINT m,  WPARAM w, LPARAM l){
+              printf("%d\n",m);
+
+          }
+     
+    
+
+  
